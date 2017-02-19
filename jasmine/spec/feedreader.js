@@ -74,13 +74,15 @@ describe('The menu', function() {
 
           it('The menu closes on click', function(){
             expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(false);
+
             if ($(".menu-icon-link").hasClass('menu-hidden')){
               expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(true);
             }
           });
-
+        });
 
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -88,12 +90,33 @@ describe('The menu', function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+         beforeEach(function(done) {
+                 loadFeed(0, done);
+             });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+         it('Entries have been sucessfully added to the feed container', function(){
+            expect($('.feed' && '.entry').length).toBeGreaterThan(0);
+         });
+       });
+    /* TODO: Write a new test suite named "New Feed Selection"*/
+    describe('New Feed Selection', function(){
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+       var title = $('.header-title');
+       beforeEach(function(done) {
+         loadFeed(1, done);
+      });
+
+      afterEach(function(done){
+        loadFeed(0, done);
+      })
+
+      it('The content changes when a new feed is loaded', function(){
+          expect($('.header-title')).not.toBe(title);
+      });
     });
 }());
