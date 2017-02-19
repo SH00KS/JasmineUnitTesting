@@ -12,7 +12,7 @@ Below is the brief for this project:
 * The website should run through each test and display the website, the results from the test can be seen at the bottom of the page.
 
 ## References
-[Jasmine](http://jasmine.github.io/)
-[jQuery](https://jquery.com/)
-[Handlebars](http://handlebarsjs.com/)
-[Google Fonts](https://fonts.google.com/)
+* [Jasmine](http://jasmine.github.io/)
+* [jQuery](https://jquery.com/)
+* [Handlebars](http://handlebarsjs.com/)
+* [Google Fonts](https://fonts.google.com/)
