@@ -21,34 +21,37 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function() {
+        it('All feeds are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
-
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         it('Checks all objects has a URL defined or is not empty.', function() {
-
+         it('All objects has a URL defined and is not empty.', function() {
              for(var i = 0; i < allFeeds.length; i++){
                //alert(allFeeds.url);
                expect(allFeeds[i].url).toBeDefined();
                expect(allFeeds[i].url).not.toBe(0);
-
              }
          });
-
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('All objects has a name defined and is not empty.', function() {
+             for(var i = 0; i < allFeeds.length; i++){
+               //alert(allFeeds.url);
+               expect(allFeeds[i].name).toBeDefined();
+               expect(allFeeds[i].name).not.toBe(0);
+             }
+         });
     });
 
-
+describe('The menu', function() {
     /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is
@@ -56,12 +59,26 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+         it('The menu is hidden by default', function(){
+           expect($("body").hasClass('menu-hidden')).toBe(true);
+         });
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+          it('The menu shows on click', function(){
+            expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(false);
+          });
+
+          it('The menu closes on click', function(){
+            expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(false);
+            if ($(".menu-icon-link").hasClass('menu-hidden')){
+              expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(true);
+            }
+          });
+
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
@@ -78,4 +95,5 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+    });
 }());
