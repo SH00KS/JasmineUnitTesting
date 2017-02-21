@@ -46,7 +46,7 @@ $(function() {
              for(var i = 0; i < allFeeds.length; i++){
                //alert(allFeeds.url);
                expect(allFeeds[i].name).toBeDefined();
-               expect(allFeeds[i].name).not.toBe(0);
+               expect(allFeeds[i].name.length).not.toBe(0);
              }
          });
     });
@@ -69,19 +69,19 @@ describe('The menu', function() {
           * clicked and does it hide when clicked again.
           */
           it('The menu shows on click', function(){
-            expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(false);
+            expect($(".menu-icon-link").trigger('click'));
+            expect($("body").hasClass('.menu-hidden')).toBe(false);
           });
 
           it('The menu closes on click', function(){
-            expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(false);
-
-            if ($(".menu-icon-link").hasClass('menu-hidden')){
-              expect($(".menu-icon-link").trigger('click').hasClass('menu-hidden')).toBe(true);
-            }
+            expect($(".menu-icon-link").trigger('click'));
+            expect($("body").hasClass('menu-hidden')).toBe(true);
           });
+
+
         });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
 
         /*  Write a test that ensures when the loadFeed
@@ -98,28 +98,25 @@ describe('The menu', function() {
             expect($('.feed .entry').length).toBeGreaterThan(0);
          });
        });
+
     /* Write a new test suite named "New Feed Selection"*/
     describe('New Feed Selection', function(){
+      beforeEach(function(done){
+          $('.feed').empty()
 
-        /*  Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+          loadFeed(0, function() {
+              entriesBefore = $('.feed').find("h2").text();
+          });
 
-       var title = $('.header-title');
-       beforeEach(function(done) {
-         loadFeed(1, done);
+          loadFeed(1, function() {
+              entriesAfter = $('.feed').find("h2").text();
+              done();
+          });
       });
 
-      /*afterEach(function(done){
-        loadFeed(0, done);
-      })*/
-
-      it('The content changes when a new feed is loaded', function(){
-          expect($('.header-title')).not.toBe(title);
-          afterEach(function(done){
-            loadFeed(0, done);
-          })
+      it('The content changes when a new feed is loaded', function(done){
+          expect(entriesBefore).not.toEqual(entriesAfter)
+          done();
       });
     });
 }());
