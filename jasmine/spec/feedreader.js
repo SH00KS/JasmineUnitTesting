@@ -105,13 +105,12 @@ describe('The menu', function() {
           $('.feed').empty()
 
           loadFeed(0, function() {
-              entriesBefore = $('.feed').find("h2").text();
-          });
-
-          loadFeed(1, function() {
-              entriesAfter = $('.feed').find("h2").text();
-              done();
-          });
+            entriesBefore = $('.feed').find("h2").text();
+            loadFeed(1, function() {
+               entriesAfter = $('.feed').find("h2").text();
+               done();
+           });
+        });
       });
 
       it('The content changes when a new feed is loaded', function(done){
